@@ -19,7 +19,7 @@
     <!-- Article -->
     <article class="g-bg-white">
       <figure class="g-pos-rel">
-        <a tal:attributes="href python:'%s' %(attr_url);"><img class="img-fluid w-100" tal:attributes="src python:attr_img.getHref(request); alt python:attr_title" /></a>
+        <a tal:attributes="href python:'%s%s' %(zmscontext.getLinkUrl(attr_url),'/');"><img class="img-fluid w-100" tal:attributes="src python:attr_img.getHref(request); alt python:attr_title" /></a>
         <figcaption tal:condition="python:attr_date" class="text-uppercase text-center g-line-height-1_2 g-bg-primary-opacity-0_8 g-color-white g-pos-abs g-top-20 g-px-15 g-py-10">
           <strong class="d-block"><span tal:replace="structure python:'%s' %(zmscontext.getLangFmtDate(attr_date,lang, '%d'))">attr_date</span></strong>
           <hr class="g-brd-white my-1">
