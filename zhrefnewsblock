@@ -1,0 +1,47 @@
+<!-- newsitem.standard_html -->
+<tal:block tal:define="global 
+  zmscontext options/zmscontext;
+  zmsroot python:zmscontext.breadcrumbs_obj_path()[0];
+  lang python:request.get('lang','ger');
+  ZMS_COMMON python:request.get('ZMS_COMMON','common');
+  Std modules/Products.PythonScripts/standard;
+  newline_to_br nocall:Std/newline_to_br; 
+  attr_title python:zmscontext.attr('attr_title');
+  attr_txt python:zmscontext.attr('attr_txt');
+  attr_date python:zmscontext.attr('attr_date');
+  attr_url python:zmscontext.attr('attr_url');
+  attr_img python:zmscontext.attr('attr_img');
+  attr_container python:zmscontext.attr('attr_container');
+  attr_css python:zmscontext.attr('attr_css');
+  items python:zmscontext.getChildNodes(request);
+  ">
+  <div class="col-lg-4 g-mb-30">
+    <!-- Article -->
+    <article class="g-bg-white">
+      <figure class="g-pos-rel">
+        <a tal:attributes="href python:'%s' %(attr_url);"><img class="img-fluid w-100" tal:attributes="src python:attr_img.getHref(request); alt python:attr_title" /></a>
+        <figcaption tal:condition="python:attr_date" class="text-uppercase text-center g-line-height-1_2 g-bg-primary-opacity-0_8 g-color-white g-pos-abs g-top-20 g-px-15 g-py-10">
+          <strong class="d-block"><span tal:replace="structure python:'%s' %(zmscontext.getLangFmtDate(attr_date,lang, '%d'))">attr_date</span></strong>
+          <hr class="g-brd-white my-1">
+          <small class="d-block"><span tal:replace="structure python:'%s' %(zmscontext.getLangFmtDate(attr_date,lang, 'Month')[:3])">attr_date</span></small>
+        </figcaption>
+      </figure>
+      <div class="g-pa-30">
+        <h3 class="h5 g-mb-15">
+          <a class="u-link-v5 g-color-gray-dark-v2 g-color-primary--hover" tal:attributes="href python:'%s%s' %(zmscontext.getLinkUrl(attr_url),'/')"><span tal:replace="structure python:newline_to_br(attr_title)">attr_title</span></a>
+        </h3>
+        <p><span tal:replace="structure python:newline_to_br(attr_txt)">attr_txt</span></p>
+        <hr class="g-brd-gray-light-v4 g-my-20">
+        <ul class="list-inline small text-uppercase mb-0">
+          <li class="list-inline-item">
+            <span class="g-color-gray-dark-v4"></span>
+            <a class="u-link-v5 g-color-main g-color-primary--hover" tal:attributes="href python:'%s%s' %(zmscontext.getLinkUrl(attr_url),'/')"><span tal:replace="structure python:unicode(zmsroot.getLangStr('HINTDETAILS',lang),'utf-8',errors='ignore')">HINTDETAILS</span></a>
+          </li>
+          <li class="list-inline-item"></li>
+        </ul>
+      </div>
+    </article>
+    <!-- End Article -->
+  </div>
+</tal:block>
+<!-- /newsitem.standard_html -->
